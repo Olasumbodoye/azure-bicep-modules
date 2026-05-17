@@ -1,6 +1,6 @@
 param location string = resourceGroup().location
 
-module networking './Modules/Resources/virtual_network.bicep' = {
+module networking './Resources/virtual_network.bicep' = {
   name: 'networkDeployment'
 
   params: {
@@ -8,7 +8,7 @@ module networking './Modules/Resources/virtual_network.bicep' = {
   }
 }
 
-module virtualMachine './Modules/Resources/virtual_machine.bicep' = {
+module virtualMachine './Resources/virtual_machine.bicep' = {
   name: 'vmDeployment'
 
   params: {
