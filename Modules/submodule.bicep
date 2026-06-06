@@ -1,5 +1,8 @@
 param location string = resourceGroup().location
 
+@secure()
+param adminPassword string
+
 module networking './Resources/virtual_network.bicep' = {
   name: 'networkDeployment'
 
@@ -14,6 +17,31 @@ module virtualMachine './Resources/virtual_machine.bicep' = {
   params: {
     location: location
     subnetId: networking.outputs.subnetId
-    adminPassword: 'Password1234!'
+    adminPassword: adminPassword
+  }
+}
+
+module storage './Resources/storage_account.bicep' = {
+  name: 'storageDeployment'
+
+  params: {
+    location: location
+  }
+}
+
+module database './Resources/database.bicep' = {
+  name: 'databaseDeployment'
+
+  params: {
+    location: location
+    adminPassword: adminPassword
+  }
+}
+
+module functionApp './Resources/function_app.bicep' = {
+  name: 'functionDeployment'
+
+  params: {
+    location: location
   }
 }

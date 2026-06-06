@@ -4,6 +4,10 @@ targetScope = 'subscription'
 // Parameters
 param environmentName string = 'dev'
 param location string = 'eastus'
+
+@secure()
+param adminPassword string
+
 param customerName string = 'olasumbo'
 param nameSeparator string = '-'
 
@@ -40,6 +44,7 @@ module submodule './Modules/submodule.bicep' = {
 
   params: {
     location: location
+    adminPassword: adminPassword
   }
 
   dependsOn: [
